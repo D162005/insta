@@ -20,7 +20,7 @@ const followSchema = new mongoose.Schema({
         }
     }
 },{
-    timestamps:{
+    timestamps:{    
         timestamps:true
     }
 })

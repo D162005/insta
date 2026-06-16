@@ -1,7 +1,9 @@
 const postModel = require('../models/post.model')
+const likeModel = require('../models/like.model')
 const cookieParser = require('cookie-parser')
 const ImageKit = require('@imagekit/nodejs')
 const {toFile} = require('@imagekit/nodejs')
+const identifyUser = require('../middlewares/auth.middleware')
 
 const imageKit = new ImageKit({
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY
@@ -69,8 +71,79 @@ async function getPostDetailsController(req,res){
     })
 }
 
+async function createLikePostController(req,res){
+    
+    const postId = req.params.postId
+    const userId = req.user.id
+
+    const isPostExist = await postModel.findById(postId)
+
+    if(!isPostExist){
+        return res.status(404).json({
+            message: 'post not found'
+        })
+    }
+
+    const isLikeExist = await likeModel.findOne({
+        postId:postId,
+        userId:userId
+    })
+
+    if(isLikeExist){
+        return res.status(200).json({
+            message: "you already like the post"
+        })
+    }
+
+    const likeRecord = await likeModel.create({
+        postId:postId,
+        userId:userId
+    })
+
+    res.status(201).json({
+        message: "you successfully like the post",
+        likePostDetails:likeRecord
+    })
+}
+
+async function createUnlikePostController(req,res){
+
+    const postId = req.params.postId
+    const userId = req.user.id
+
+    const isPostExist = await postModel.findById(postId)
+
+    if(!isPostExist){
+        return res.status(404).json({
+            message: 'post Not Found'
+        })
+    }
+
+    const isLikeExist = await likeModel.findOne({
+        postId:postId,
+        userId:userId
+    })
+
+    if(!isLikeExist){
+        return res.status(200).json({
+            message: "you are not liked the post (already unlike the post)"
+        })
+    }
+
+    const likeRecord = await likeModel.findByIdAndDelete(isLikeExist._id)
+
+    res.status(204).json({
+        message:"successfully Unlike the post",
+        likeRecord
+    })
+
+
+}
+
 module.exports = {
     postCreateController,
     getPostController,
-    getPostDetailsController
+    getPostDetailsController,
+    createLikePostController,
+    createUnlikePostController
 }

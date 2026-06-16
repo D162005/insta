@@ -10,5 +10,7 @@ const postRouter = express.Router()
 postRouter.post('/',upload.single("dummy"), identifyUser, postController.postCreateController)
 postRouter.get('/', identifyUser, postController.getPostController)
 postRouter.get('/details/:postId', identifyUser, postController.getPostDetailsController)
+postRouter.post('/like/:postId', identifyUser, postController.createLikePostController)
+postRouter.delete('/unlike/:postId',identifyUser, postController.createUnlikePostController)
 
 module.exports = postRouter
