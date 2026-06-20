@@ -1,10 +1,13 @@
 import React from 'react'
 import './App.scss'
 import AppRoutes from './AppRoutes'
+import { AuthPovider } from './features/auth/auth.context.jsx'
 
 const App = () => {
   return (
-    <AppRoutes/>
+    <AuthPovider>
+      <AppRoutes/>
+    </AuthPovider>
   )
 }
 
