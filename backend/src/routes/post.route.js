@@ -10,6 +10,7 @@ const postRouter = express.Router()
 postRouter.post('/',upload.single("dummy"), identifyUser, postController.postCreateController)
 postRouter.get('/', identifyUser, postController.getPostController)
 postRouter.get('/details/:postId', identifyUser, postController.getPostDetailsController)
+postRouter.get('/all-posts',identifyUser,postController.getAllPostsController)
 postRouter.post('/like/:postId', identifyUser, postController.createLikePostController)
 postRouter.delete('/unlike/:postId',identifyUser, postController.createUnlikePostController)
 

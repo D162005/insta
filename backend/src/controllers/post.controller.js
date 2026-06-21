@@ -136,8 +136,15 @@ async function createUnlikePostController(req,res){
         message:"successfully Unlike the post",
         likeRecord
     })
+}
 
+async function getAllPostsController(req,res){
+    const posts = await postModel.find().populate('user')
 
+    res.status(200).json({
+        message:'posts are fatch successfully',
+        posts
+    })
 }
 
 module.exports = {
@@ -145,5 +152,6 @@ module.exports = {
     getPostController,
     getPostDetailsController,
     createLikePostController,
-    createUnlikePostController
+    createUnlikePostController,
+    getAllPostsController
 }
