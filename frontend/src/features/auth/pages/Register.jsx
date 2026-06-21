@@ -13,6 +13,12 @@ const Register = () => {
     const {loading, handleRegister} = useAuth()
     const nevigate = useNavigate()
 
+    if(loading){
+        return(
+            <main><h1>Loading...</h1></main>
+        )
+    }
+
     const handleSubmitButt = (e)=>{
         e.preventDefault()
 

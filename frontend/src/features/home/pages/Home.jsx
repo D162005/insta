@@ -4,7 +4,13 @@ import '../style/home.scss'
 const Home = () => {
   return (
     <>
-      <h1>welcome page</h1>
+      <main>
+        <div className='feed-section'>
+          {Feed.map(post=>{
+            return <Post/>
+          })}
+        </div>
+      </main>
     </>
   )
 }
