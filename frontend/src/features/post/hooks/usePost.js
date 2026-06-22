@@ -12,7 +12,7 @@ export function usePost(){
         setLoading(true)
 
         const data = await getAllPost()
-        setPosts(data.posts ?? data ?? [])
+        setPosts(data.posts.reverse() ?? data ?? [])
         setLoading(false)
     }
 
@@ -20,7 +20,7 @@ export function usePost(){
         setLoading(true)
 
         const data = await createPost(caption,imgUrl)
-        // setPosts([data.post,...posts])
+        setPosts([data.post,...posts])
         setLoading(false)
     }
 

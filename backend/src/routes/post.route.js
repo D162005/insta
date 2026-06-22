@@ -7,7 +7,7 @@ const identifyUser = require('../middlewares/auth.middleware')
 
 const postRouter = express.Router()
 
-postRouter.post('/',upload.single("dummy"), identifyUser, postController.postCreateController)
+postRouter.post('/',upload.single("instaFile"), identifyUser, postController.postCreateController)
 postRouter.get('/', identifyUser, postController.getPostController)
 postRouter.get('/details/:postId', identifyUser, postController.getPostDetailsController)
 postRouter.get('/all-posts',identifyUser,postController.getAllPostsController)
