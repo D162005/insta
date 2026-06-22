@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router'
 
 const Home = () => {
 
-    const {posts, loading, handleGetAllPosts} = usePost()
+    const {posts, loading, handleGetAllPosts, handleLikePost, handleUnlikePost} = usePost()
   
     useEffect(()=>{
       handleGetAllPosts()
@@ -33,7 +33,7 @@ const Home = () => {
       <main>
         <div className='feed-section'>
           {posts.map(post=>{
-            return <Post key={post._id}user={post.user} post={post} />
+            return <Post key={post._id}user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} />
           })}
         </div>
       </main>

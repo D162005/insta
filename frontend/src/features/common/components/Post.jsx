@@ -1,9 +1,11 @@
 import React from 'react'
 import '../../home/style/home.scss'
 
-const Post = ({user,post}) => {
+const Post = ({user,post,handleLikePost,handleUnlikePost }) => {
 
-  console.log(post.isLiked)
+  
+
+  console.log(post._id)
 
   return (
     <>
@@ -18,7 +20,7 @@ const Post = ({user,post}) => {
         <lower-sec>
           <icon-sec>
             <icon-sec-left>
-              {post.isLiked ? <i className="ri-poker-hearts-fill liked-fill"></i> : <i className="ri-poker-hearts-line"></i>}
+              {post.isLiked ? <i className="ri-poker-hearts-fill liked-fill" onClick={()=>{handleUnlikePost(post._id)}} ></i> : <i className="ri-poker-hearts-line" onClick={()=>{handleLikePost(post._id)}}></i>}
               {/* <i class="ri-poker-hearts-line"></i> */}
               {/* <i class="ri-poker-hearts-fill"></i> */}
               <i className="ri-chat-1-line"></i>
