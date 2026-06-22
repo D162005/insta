@@ -13,7 +13,7 @@ async function postCreateController(req,res){
 
     const file = await imageKit.files.upload({
         file: await toFile(Buffer.from(req.file.buffer), 'file'),
-        fileName: 'dummy',
+        fileName: 'instaFile',
         folder:'Insta_Clone'
     })
 
@@ -139,7 +139,18 @@ async function createUnlikePostController(req,res){
 }
 
 async function getAllPostsController(req,res){
-    const posts = await postModel.find().populate('user')
+    const userId = req.user.id
+    const posts = await Promise.all((await postModel.find().populate('user').lean())
+        .map(async (post)=>{
+            const isLiked = await likeModel.findOne({
+                postId:post._id,
+                userId:userId
+            })
+
+            post.isLiked = !!isLiked
+
+            return post
+        }))
 
     res.status(200).json({
         message:'posts are fatch successfully',

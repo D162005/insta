@@ -1,0 +1,40 @@
+import React from 'react'
+import '../../home/style/home.scss'
+
+const Post = ({user,post}) => {
+
+  console.log(post.isLiked)
+
+  return (
+    <>
+      <post className='feed'>
+        <upper-sec>
+          <img src={user.profileImage} alt="" />
+          <h3>{user.userName}</h3>
+        </upper-sec>
+        <post-sec>
+          <img src={post.imgUrl} alt="" />
+        </post-sec>
+        <lower-sec>
+          <icon-sec>
+            <icon-sec-left>
+              {post.isLiked ? <i className="ri-poker-hearts-fill liked-fill"></i> : <i className="ri-poker-hearts-line"></i>}
+              {/* <i class="ri-poker-hearts-line"></i> */}
+              {/* <i class="ri-poker-hearts-fill"></i> */}
+              <i className="ri-chat-1-line"></i>
+              <i className="ri-share-line"></i>
+            </icon-sec-left>
+            <icon-sec-right>
+              <i className="ri-bookmark-line"></i>
+            </icon-sec-right>
+          </icon-sec>
+          <caption-sec>
+            <p>caption: {post.caption}</p>
+          </caption-sec>
+        </lower-sec>
+      </post>
+    </>
+  )
+}
+
+export default Post
