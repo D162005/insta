@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const ImageKit = require('@imagekit/nodejs')
 const {toFile} = require('@imagekit/nodejs')
 const identifyUser = require('../middlewares/auth.middleware')
+const followModel = require('../models/follow.model')
 
 const imageKit = new ImageKit({
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY
@@ -149,6 +150,12 @@ async function getAllPostsController(req,res){
 
             post.isLiked = !!isLiked
 
+            const isFollow = await followModel.findOne({
+                follower:userId,
+                followee:post.user._id
+            })
+
+            post.isFollow = !!isFollow
             return post
         }))
 

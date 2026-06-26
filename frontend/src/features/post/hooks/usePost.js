@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { PostContext} from "../Post.context";
-import { getAllPost, createPost, likePost, UnlikePost, getPersonalPosts } from "../services/post.api";
+import { getAllPost, createPost, likePost, UnlikePost, getPersonalPosts, followUser, unfollowUser } from "../services/post.api";
 
 export function usePost(){
 
@@ -43,8 +43,20 @@ export function usePost(){
         setPersonalPosts(data.posts.reverse() ?? data ?? [])
         setLoading(false)
     }
-    console.log(personalPosts)
 
-    return {loading, posts, handleGetAllPosts, handleCreatePost, handleLikePost, handleUnlikePost, handleGetAllPersonalPosts, personalPosts}
+    const handleFollowUser = async(userId)=>{
+        const data = await followUser(userId)
+        await handleGetAllPosts()
+        return data
+    }
+
+    const handleUnfollowUser = async(userId)=>{
+        const data = await unfollowUser(userId)
+        await handleGetAllPosts()
+        return data
+
+    }
+
+    return {loading, posts, handleGetAllPosts, handleCreatePost, handleLikePost, handleUnlikePost, handleGetAllPersonalPosts, personalPosts, handleFollowUser, handleUnfollowUser}
 
 }

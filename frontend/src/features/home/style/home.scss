@@ -40,20 +40,40 @@ main {
       upper-sec {
         display: flex;
         // flex-direction: column;
-        gap: 0.5rem;
+        justify-content: space-between;
         align-items: center;
-        padding-inline: 0.2rem;
+        padding-inline: 0.4rem;
+        padding-top:0.4rem ;
 
-        img {
-          width: 2rem;
-          aspect-ratio: 1/1;
-          border-radius: 50%;
-          object-fit: cover;
+        upper-left{
+          display: flex;
+          // flex-direction: column;
+          gap: 0.5rem;
+          align-items: center;
+            
+
+          img {
+            width: 2rem;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          h3 {
+            color: antiquewhite;
+            font-size: 1.2rem;
+          }
         }
-        h3 {
-          color: antiquewhite;
-          font-size: 1.2rem;
+
+        upper-right{
+          button{
+            background-color: rgba(151, 150, 149, 0.822);
+            color: antiquewhite;
+            border-color:rgb(180, 177, 177) ;
+            border-radius: 1rem;
+          }
         }
+
+        
       }
 
       post-sec {

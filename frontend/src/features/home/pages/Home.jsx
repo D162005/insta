@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router'
 
 const Home = () => {
 
-    const {posts, loading, handleGetAllPosts, handleLikePost, handleUnlikePost, handleGetAllPersonalPosts, personalPosts} = usePost()
+    const {posts, loading, handleGetAllPosts, handleLikePost, handleUnlikePost, handleGetAllPersonalPosts, personalPosts, handleFollowUser, handleUnfollowUser} = usePost()
     const {getUser, handleGetMe} = useAuth()
     const [allFedd, setAllFedd] = useState(true)
     const nevigate = useNavigate()
@@ -41,7 +41,7 @@ const Home = () => {
           posts.length == 0 ? <main><h1>No Post Found</h1></main>:
           <div className='feed-section'>
           {posts.map(post=>{
-            return <Post className='post-sec' key={post._id}user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} />
+            return <Post className='post-sec' key={post._id} user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} handleFollowUser={handleFollowUser} handleUnfollowUser={handleUnfollowUser}/>
           })}
           
         </div>
@@ -50,7 +50,7 @@ const Home = () => {
           personalPosts.length == 0 ? <main><h1>No Post Found</h1></main>:
           <div className='feed-section'>
             {personalPosts.map(post=>{
-              return <Post className='post-sec' key={post._id}user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} />
+              return <Post className='post-sec' key={post._id} user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} handleFollowUser={handleFollowUser} handleUnfollowUser={handleUnfollowUser}/>
             })}
           
           </div>

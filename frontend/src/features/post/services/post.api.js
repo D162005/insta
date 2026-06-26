@@ -40,3 +40,15 @@ export async function getPersonalPosts(){
     return response.data
     
 }
+
+export async function followUser(userId){
+    const response = await axios.post('http://localhost:3000/api/user/follow/'+userId,{withCredentials:true})
+    getAllPost()
+    return response.data
+}
+
+export async function unfollowUser(userId){
+    const response = await axios.delete('http://localhost:3000/api/user/follow/'+userId,{withCredentials:true})
+    getAllPost()
+    return response.data
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../home/style/home.scss'
 
-const Post = ({user,post,handleLikePost,handleUnlikePost }) => {
+const Post = ({user,post,handleLikePost,handleUnlikePost, handleFollowUser, handleUnfollowUser }) => {
 
   
 
@@ -11,8 +11,13 @@ const Post = ({user,post,handleLikePost,handleUnlikePost }) => {
     <>
       <post className='feed'>
         <upper-sec>
-          <img src={user.profileImage} alt="" />
-          <h3>{user.userName}</h3>
+          <upper-left>
+            <img src={user.profileImage} alt="" />
+            <h3>{user.userName}</h3>
+          </upper-left>
+          <upper-right>
+            {post.isFollow ? <button onClick={()=>{handleUnfollowUser(post.user._id)}}>Following</button> : <button onClick={()=>{handleFollowUser(post.user._id)}}>Follow</button> }
+          </upper-right>
         </upper-sec>
         <post-sec>
           <img src={post.imgUrl} alt="" />
