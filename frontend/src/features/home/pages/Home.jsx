@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router'
 const Home = () => {
 
     const {posts, loading, handleGetAllPosts, handleLikePost, handleUnlikePost} = usePost()
-  
+    const nevigate = useNavigate()
+
     useEffect(()=>{
       handleGetAllPosts()
     },[])
@@ -26,6 +27,7 @@ const Home = () => {
 
   return (
     <>
+    <home-sec>
       <nav-bar>
         <h2>Insta</h2>
         <PostCreatedButt></PostCreatedButt>
@@ -33,10 +35,18 @@ const Home = () => {
       <main>
         <div className='feed-section'>
           {posts.map(post=>{
-            return <Post key={post._id}user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} />
+            return <Post className='post-sec' key={post._id}user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} />
           })}
+          
         </div>
       </main>
+      <footer>
+        <footer-sec>
+          <i class="ri-home-4-line" onClick={()=>{nevigate('/')}}></i>
+          <i class="ri-file-user-line" onClick={()=>{nevigate('/')}}></i>
+        </footer-sec>
+      </footer>
+    </home-sec>
     </>
   )
 }

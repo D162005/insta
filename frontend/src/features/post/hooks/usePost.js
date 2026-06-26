@@ -26,12 +26,14 @@ export function usePost(){
 
     const handleLikePost = async(postId)=>{
         const data = await likePost(postId)
+        await handleGetAllPosts()
         return data
 
     }
 
     const handleUnlikePost = async(postId)=>{
         const data = await UnlikePost(postId)
+        await handleGetAllPosts()
         return data
     }
 

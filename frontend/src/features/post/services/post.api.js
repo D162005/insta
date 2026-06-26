@@ -25,11 +25,11 @@ export async function createPost(caption,imgUrl){
 export async function likePost(postId){
     const response = await api.post('/post/like/'+ postId)
     getAllPost()
-    // return response.data
+    return response.data
 }
 
 export async function UnlikePost(postId){
     const response = await api.delete('/post/unlike/'+postId)
     getAllPost()
-    // return response.data
+    return response.data
 }
