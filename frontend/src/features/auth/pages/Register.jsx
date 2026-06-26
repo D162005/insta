@@ -31,12 +31,16 @@ const Register = () => {
 
   return (
     <>
+    <nav-bar>
+        <h2 onClick={()=>{nevigate('/')}}>Insta</h2>
+        <button onClick={()=>{nevigate('/')}}> Back </button>
+      </nav-bar>
     <main>
         <h1>Register</h1>
         <form onSubmit={handleSubmitButt}>
-            <input type="text" name='userName' onInput={(e)=>{setUserName(e.target.value)}} />
-            <input type="text" name='email' onInput={(e)=>{setEmail(e.target.value)}}/>
-            <input type="password" name='password' onInput={(e)=>{setpassword(e.target.value)}}/>
+            <input type="text" name='userName' onInput={(e)=>{setUserName(e.target.value)}} placeholder='User Name'/>
+            <input type="text" name='email' onInput={(e)=>{setEmail(e.target.value)}} placeholder='Email'/>
+            <input type="password" name='password' onInput={(e)=>{setpassword(e.target.value)}} placeholder='Password'/>
             <button>Register</button>
         </form>
         <p>Already have a Account <Link className='authTogel' to='/login'>Login</Link></p>

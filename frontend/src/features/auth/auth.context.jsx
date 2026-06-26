@@ -36,7 +36,7 @@ export function AuthPovider({children}){
     const handleGetMe = async()=>{
         setLoading(true)
         const response = await getMe()
-        setGetUser(response.data.user)
+        setGetUser(response.data)
         console.log(getUser)
         setLoading(false)
     }

@@ -33,5 +33,5 @@ export async function login(userName, password){
 export async function getMe(){
     const response = await api.get('/get-me')
     console.log(response.data.userName)
-    return response.data
+    return response.data.userName
 }

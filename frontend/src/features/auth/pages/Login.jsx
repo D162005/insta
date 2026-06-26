@@ -31,11 +31,15 @@ const Login = () => {
 
   return (
     <>
+    <nav-bar>
+        <h2 onClick={()=>{nevigator('/')}}>Insta</h2>
+        <button onClick={()=>{nevigator('/')}}> Back </button>
+    </nav-bar>
     <main>
         <h1>Login</h1>
         <form onSubmit={handleSubmitButt}>
-            <input type="text" name="userName" onInput={(e)=>{setUserName(e.target.value)}}/>
-            <input type="password" name='password' onInput={(e)=>{setPassword(e.target.value)}}/>
+            <input type="text" name="userName" onInput={(e)=>{setUserName(e.target.value)}} placeholder='User Name'/>
+            <input type="password" name='password' onInput={(e)=>{setPassword(e.target.value)}} placeholder='Password'/>
             <button>Login</button>
         </form>
         <p>Don't have Account <Link className='authTogel' to='/register'>Register</Link></p>

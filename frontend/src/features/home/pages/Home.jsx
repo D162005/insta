@@ -5,14 +5,15 @@ import { useEffect, useState } from 'react'
 import { usePost } from '../../post/hooks/usePost'
 import PostCreatedButt from '../components/PostCreatedButt'
 import { useAuth } from '../../auth/hooks/useAuth'
+import { useNavigate } from 'react-router'
 
 const Home = () => {
 
     const {posts, loading, handleGetAllPosts, handleLikePost, handleUnlikePost, handleGetAllPersonalPosts, personalPosts} = usePost()
     const {getUser, handleGetMe} = useAuth()
     const [allFedd, setAllFedd] = useState(true)
+    const nevigate = useNavigate()
     
-
     useEffect(()=>{
       handleGetMe()
       handleGetAllPosts()
@@ -25,16 +26,14 @@ const Home = () => {
       )
     }
 
-
-
-    console.log(getUser)
+    console.log(posts)
     
 
   return (
     <>
     <home-sec>
       <nav-bar>
-        <h2>Insta</h2>
+        <h2 onClick={()=>{nevigate('/')}}>Insta</h2>
         <PostCreatedButt></PostCreatedButt>
       </nav-bar>
       <main>

@@ -28,6 +28,10 @@ const PostCreateForm = () => {
 
   return (
     <>
+      <nav-bar>
+        <h2 onClick={()=>{nevigate('/')}}>Insta</h2>
+        <button onClick={()=>{nevigate('/')}}> Back </button>
+      </nav-bar>
       <main>
         <h1>Create Post</h1>
         <form onSubmit={handlePostCreateButt}>
