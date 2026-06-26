@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import {login, register} from './services/auth.api.js'
+import {login, register, getMe} from './services/auth.api.js'
 
 export const AuthContext = createContext()
 
@@ -7,6 +7,7 @@ export function AuthPovider({children}){
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [getUser, setGetUser] = useState(null)
 
     const handleLogin = async(userName,password)=>{
         setLoading(true)
@@ -32,9 +33,16 @@ export function AuthPovider({children}){
             setLoading(false)
         }
     }
+    const handleGetMe = async()=>{
+        setLoading(true)
+        const response = await getMe()
+        setGetUser(response.data.user)
+        console.log(getUser)
+        setLoading(false)
+    }
 
     return(
-        <AuthContext.Provider value={{user, loading, handleLogin, handleRegister}}>
+        <AuthContext.Provider value={{user, loading, getUser,handleLogin, handleRegister, handleGetMe}}>
             {children}
         </AuthContext.Provider>
     )

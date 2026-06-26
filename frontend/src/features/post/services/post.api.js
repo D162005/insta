@@ -33,3 +33,10 @@ export async function UnlikePost(postId){
     getAllPost()
     return response.data
 }
+
+export async function getPersonalPosts(){
+    const response = await api.get('/post/')
+    console.log(response.data)
+    return response.data
+    
+}

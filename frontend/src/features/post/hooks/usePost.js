@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { PostContext} from "../Post.context";
-import { getAllPost, createPost, likePost, UnlikePost } from "../services/post.api";
+import { getAllPost, createPost, likePost, UnlikePost, getPersonalPosts } from "../services/post.api";
 
 export function usePost(){
 
     const context = useContext(PostContext)
 
-    const { posts, loading, setPosts, setLoading} = context
+    const { posts, loading, setPosts, setLoading, personalPosts, setPersonalPosts} = context
 
     const handleGetAllPosts = async()=>{
         setLoading(true)
@@ -37,6 +37,14 @@ export function usePost(){
         return data
     }
 
-    return {loading, posts, handleGetAllPosts, handleCreatePost, handleLikePost, handleUnlikePost}
+    const handleGetAllPersonalPosts = async()=>{
+        setLoading(true)
+        const data = await getPersonalPosts()
+        setPersonalPosts(data.posts.reverse() ?? data ?? [])
+        setLoading(false)
+    }
+    console.log(personalPosts)
+
+    return {loading, posts, handleGetAllPosts, handleCreatePost, handleLikePost, handleUnlikePost, handleGetAllPersonalPosts, personalPosts}
 
 }

@@ -1,18 +1,22 @@
 import React from 'react'
 import '../style/home.scss'
 import Post from '../../common/components/Post'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { usePost } from '../../post/hooks/usePost'
 import PostCreatedButt from '../components/PostCreatedButt'
-import { useNavigate } from 'react-router'
+import { useAuth } from '../../auth/hooks/useAuth'
 
 const Home = () => {
 
-    const {posts, loading, handleGetAllPosts, handleLikePost, handleUnlikePost} = usePost()
-    const nevigate = useNavigate()
+    const {posts, loading, handleGetAllPosts, handleLikePost, handleUnlikePost, handleGetAllPersonalPosts, personalPosts} = usePost()
+    const {getUser, handleGetMe} = useAuth()
+    const [allFedd, setAllFedd] = useState(true)
+    
 
     useEffect(()=>{
+      handleGetMe()
       handleGetAllPosts()
+      handleGetAllPersonalPosts()
     },[])
   
     if(loading){
@@ -20,9 +24,10 @@ const Home = () => {
         <main><h1>Loading...</h1></main>
       )
     }
-  
-    console.log(posts)
 
+
+
+    console.log(getUser)
     
 
   return (
@@ -33,17 +38,30 @@ const Home = () => {
         <PostCreatedButt></PostCreatedButt>
       </nav-bar>
       <main>
-        <div className='feed-section'>
+        {allFedd == true ? (
+          posts.length == 0 ? <main><h1>No Post Found</h1></main>:
+          <div className='feed-section'>
           {posts.map(post=>{
             return <Post className='post-sec' key={post._id}user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} />
           })}
           
         </div>
+
+        ):(
+          personalPosts.length == 0 ? <main><h1>No Post Found</h1></main>:
+          <div className='feed-section'>
+            {personalPosts.map(post=>{
+              return <Post className='post-sec' key={post._id}user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} />
+            })}
+          
+          </div>
+        )} 
+
       </main>
       <footer>
         <footer-sec>
-          <i class="ri-home-4-line" onClick={()=>{nevigate('/')}}></i>
-          <i class="ri-file-user-line" onClick={()=>{nevigate('/')}}></i>
+          <i className="ri-home-4-line" onClick={()=>{setAllFedd(true)}}></i>
+          <i className="ri-file-user-line" onClick={()=>{setAllFedd(false)}}></i>
         </footer-sec>
       </footer>
     </home-sec>
