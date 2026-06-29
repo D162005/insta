@@ -16,7 +16,7 @@ const Post = ({user,post,handleLikePost,handleUnlikePost, handleFollowUser, hand
             <h3>{user.userName}</h3>
           </upper-left>
           <upper-right>
-            {post.isFollow ? <button onClick={()=>{handleUnfollowUser(post.user._id)}}>Following</button> : <button onClick={()=>{handleFollowUser(post.user._id)}}>Follow</button> }
+            {post.isFollow ? <button onClick={()=>{handleUnfollowUser(user._id)}}>Following</button> : <button onClick={()=>{handleFollowUser(user._id)}}>Follow</button> }
           </upper-right>
         </upper-sec>
         <post-sec>
@@ -25,6 +25,7 @@ const Post = ({user,post,handleLikePost,handleUnlikePost, handleFollowUser, hand
         <lower-sec>
           <icon-sec>
             <icon-sec-left>
+              
               {post.isLiked ? <i className="ri-poker-hearts-fill liked-fill" onClick={()=>{handleUnlikePost(post._id)}} ></i> : <i className="ri-poker-hearts-line" onClick={()=>{handleLikePost(post._id)}}></i>}
               {/* <i class="ri-poker-hearts-line"></i> */}
               {/* <i class="ri-poker-hearts-fill"></i> */}
