@@ -27,6 +27,7 @@ export function usePost(){
     const handleLikePost = async(postId)=>{
         const data = await likePost(postId)
         await handleGetAllPosts()
+        await handleGetAllPersonalPosts()
         return data
 
     }
@@ -34,6 +35,7 @@ export function usePost(){
     const handleUnlikePost = async(postId)=>{
         const data = await UnlikePost(postId)
         await handleGetAllPosts()
+        await handleGetAllPersonalPosts()
         return data
     }
 
@@ -47,12 +49,15 @@ export function usePost(){
     const handleFollowUser = async(userId)=>{
         const data = await followUser(userId)
         await handleGetAllPosts()
+        await handleGetAllPersonalPosts()
+        console.log(data)
         return data
     }
 
     const handleUnfollowUser = async(userId)=>{
         const data = await unfollowUser(userId)
         await handleGetAllPosts()
+        await handleGetAllPersonalPosts()
         return data
 
     }

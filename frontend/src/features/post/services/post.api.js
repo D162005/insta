@@ -25,12 +25,14 @@ export async function createPost(caption,imgUrl){
 export async function likePost(postId){
     const response = await api.post('/post/like/'+ postId)
     getAllPost()
+    getPersonalPosts()
     return response.data
 }
 
 export async function UnlikePost(postId){
     const response = await api.delete('/post/unlike/'+postId)
     getAllPost()
+    getPersonalPosts()
     return response.data
 }
 
@@ -44,11 +46,13 @@ export async function getPersonalPosts(){
 export async function followUser(userId){
     const response = await axios.post('http://localhost:3000/api/user/follow/'+userId,{withCredentials:true})
     getAllPost()
+    getPersonalPosts()
     return response.data
 }
 
 export async function unfollowUser(userId){
     const response = await axios.delete('http://localhost:3000/api/user/follow/'+userId,{withCredentials:true})
     getAllPost()
+    getPersonalPosts()
     return response.data
 }

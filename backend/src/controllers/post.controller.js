@@ -34,9 +34,27 @@ async function getPostController(req,res){
 
     let userId = req.user.id
     
-    const posts = await postModel.find({
+    const posts = await Promise.all ((await postModel.find({
         user:userId
-    }).populate('user').lean()
+    }).populate('user').lean())
+    .map(async(post)=>{
+        const isLiked = await likeModel.findOne({
+            postId:post._id,
+            userId:userId
+        })
+        
+        post.isLiked = !!isLiked
+
+        const isFollow = await followModel.findOne({
+            follower:userId,
+            followee:post.user.id
+        })
+
+        post.isFollow = !!isFollow
+
+        return post
+    }))
+    
 
     res.status(200).json({
         message: "posts fatch successfully",
