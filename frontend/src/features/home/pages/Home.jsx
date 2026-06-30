@@ -20,50 +20,66 @@ const Home = () => {
       handleGetAllPersonalPosts()
     },[])
   
-    if(loading){
+    if(!!getUser == true && loading){
       return(
         <main><h1>Loading...</h1></main>
       )
     }
 
-    console.log(posts)
+    
+
+    console.log(!!getUser==true)
     
 
   return (
     <>
-    <home-sec>
-      <nav-bar>
-        <h2 onClick={()=>{nevigate('/')}}>Insta</h2>
-        <PostCreatedButt></PostCreatedButt>
-      </nav-bar>
-      <main>
-        {allFedd == true ? (
-          posts.length == 0 ? <main><h1>No Post Found</h1></main>:
-          <div className='feed-section'>
-          {posts.map(post=>{
-            return <Post className='post-sec' key={post._id} user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} handleFollowUser={handleFollowUser} handleUnfollowUser={handleUnfollowUser}/>
-          })}
-          
-        </div>
-
-        ):(
-          personalPosts.length == 0 ? <main><h1>No Post Found</h1></main>:
-          <div className='feed-section'>
-            {personalPosts.map(post=>{
+    {(!!getUser == false && loading) ? 
+      <home-sec>
+        <nav-bar>
+          <h2 onClick={()=>{nevigate('/')}}>Insta</h2>
+        </nav-bar>
+        <main>
+          <label>WELCOME TO INSTA</label>
+          <log-buttons>
+            <button onClick={()=>{nevigate('/login')}}>Login</button>
+            <button onClick={()=>{nevigate('/register')}}>Register</button>
+          </log-buttons>
+        </main>
+      </home-sec> :
+      <home-sec>
+        <nav-bar>
+          <h2 onClick={()=>{nevigate('/')}}>Insta</h2>
+          <PostCreatedButt></PostCreatedButt>
+        </nav-bar>
+        <main>
+          {allFedd == true ? (
+            posts.length == 0 ? <main><h1>No Post Found</h1></main>:
+            <div className='feed-section'>
+            {posts.map(post=>{
               return <Post className='post-sec' key={post._id} user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} handleFollowUser={handleFollowUser} handleUnfollowUser={handleUnfollowUser}/>
             })}
           
           </div>
-        )} 
 
-      </main>
-      <footer>
-        <footer-sec>
-          <i className="ri-home-4-line" onClick={()=>{setAllFedd(true)}}></i>
-          <i className="ri-file-user-line" onClick={()=>{setAllFedd(false)}}></i>
-        </footer-sec>
-      </footer>
-    </home-sec>
+          ):(
+            personalPosts.length == 0 ? <main><h1>No Post Found</h1></main>:
+            <div className='feed-section'>
+              {personalPosts.map(post=>{
+                return <Post className='post-sec' key={post._id} user={post.user} post={post} handleLikePost={handleLikePost} handleUnlikePost={handleUnlikePost} handleFollowUser={handleFollowUser} handleUnfollowUser={handleUnfollowUser}/>
+              })}
+          
+            </div>
+          )} 
+
+        </main>
+        <footer>
+          <footer-sec>
+            <i className="ri-home-4-line" onClick={()=>{setAllFedd(true)}}></i>
+            <i className="ri-file-user-line" onClick={()=>{setAllFedd(false)}}></i>
+          </footer-sec>
+        </footer>
+      </home-sec>
+    }
     </>
   )
 }

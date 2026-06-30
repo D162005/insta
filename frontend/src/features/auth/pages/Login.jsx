@@ -9,12 +9,12 @@ const Login = () => {
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
 
-    const {handleLogin, loading} = useAuth()
+    const {handleLogin, loading, getMe} = useAuth()
     const nevigator = useNavigate()
 
-    if(loading){
+    if(loading && !!getMe == true){
         return(
-            <h1>Loading...</h1>
+            <main><h1>Loading...</h1></main>
         )
     }
 
